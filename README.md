@@ -59,7 +59,7 @@ curl -X POST "http://localhost:8080/purchases"  --data '{"itemId": 3, "itemQuant
 #### Data Model
 The basic data model consists of the following entities:
 - `View (id, dateTime)`: used for keeping track (datetime) of the number of times items were viewed. Note that this entity is not specific to an item but is updated whenever all items are retrieved (since there's no separate API to retrieve individual items),
-- `Item (id, name, description, price, quantity)`: contains basic information about items including the price and stock quantity,  
+- `Item (id, name, description, price, quantity)`: contains basic information about items including the price and stock quantity where the stock quantity is being reduced with every purchase until it's depleated when the app will start rejecting purchase orders complaining out being out of stock,
 - `Purchase (id, userId, itemId, price, createdDateTime)`: contains information about an item purchase including which user made the purchase, at what price (since it could differ from the price in the `item` table due to utilizing the surge model) and purchased quantity,
 - `User (id, firstName, lastName, apiKey)`: contains basic info about users including their `apikey` which is used for authentication purposes.
 
@@ -72,7 +72,7 @@ Data is pre-populated with 3 items (my favourite beer) and a single user whose A
 #### Pricing Logic
 Each time items are "viewed" (that is, retrieved by the `GET /items` operation), the system keeps track of these "views" and adjusts the prices retrieved if needed (i.e. if more than 10 "views" in last hour, the item price retrieved will be increased by 10%). The same logic is used when processing a purchase order at which time the same calculation is applied to item price which will be adjusted if needed. Note that there's a chance that the prices "shown" when the items where being "viewed" could differ from the final purchase price if there's a bigger time gap between "viewing" and "purchasing" an item. This is similar to how some online payment systems behave when making final calculations of currency conversion rates and similar.
 
-The parameters involved in this calculation have been externalize to the `application.properties` file.     
+The parameters involved in this calculation have been externalize to the `application.properties` file.
 
 
 #### Security
