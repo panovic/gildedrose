@@ -89,7 +89,7 @@ curl -X POST "http://localhost:8080/purchases"  --data '{"itemId": 3, "itemQuant
 The __Spring Security__ module was used for ensuring that only the authenticated users may purchase items. 
 
 #### Testing Notes
-Unit tests were created for all major components having behaviour/logic. Dummy classes without any logic like Exception classes, model/dto, etc were not being unit-tested. The code coverage for units with behaviour/logic that made sense to test is pretty high (close to 100%) while it is significantly less in case the components didn't have anything meaningful to unit-test. Special attention was paid to edge cases as well as important business scenarious (i.e. surge pricing, etc.). Note that all three layers were being unit-tested (controller, service, and repository) You may run unit-test with the following command:
+Unit tests were created for all major components having behaviour/logic. Dummy classes without any logic like Exception classes, model/dto, etc were not being unit-tested. The code coverage for units with behaviour/logic that made sense to test is very high while it is significantly less in case the components didn't have anything meaningful to unit-test. Special attention was paid to edge cases as well as important business scenarious (i.e. surge pricing, etc.). Note that all three layers were being unit-tested (controller, service, and repository) You may run unit-test with the following command:
 ```bash
 mvn clean test
 ```
