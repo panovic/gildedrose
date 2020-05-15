@@ -3,7 +3,6 @@ package com.example.gildedrose.dto;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -11,8 +10,8 @@ public class Item {
     private @Id @GeneratedValue Long id;
     private @NotNull String name;
     private @NotNull String description;
-    private @NotNull @Min(value=1) Integer price;
-    private @NotNull @Min(value=1) Integer quantity;
+    private @NotNull Integer price;
+    private @NotNull Integer quantity;
 
     public Item() { }
 
